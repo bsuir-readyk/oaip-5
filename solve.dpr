@@ -43,22 +43,6 @@ begin
   end;
 end;
 
-procedure logArray(arr: array of UInt64);
-var
-  a: UInt64;
-begin
-  Write('[');
-  a:=0;
-  while a < Length(arr) do
-  begin
-      if a <> 0 then Write(', ');
-
-      Write(arr[a]);
-      Inc(a);
-  end;
-  Writeln(']');
-end;
-
 { Sorts }
 procedure BubbleSortWithFlag(var arr: array of UInt64; var exchanges: UInt64; var comparisons: UInt64);
 var
@@ -155,11 +139,6 @@ begin
   fillArrayRev(a100Rev);
   fillArrayRev(a2000Rev);
 
-  Writeln;
-  logArray(a10Rand);
-  logArray(a10Sorted);
-  logArray(a10Rev);
-
   // ShellSort arrays
   ShellSort(a10Rand, ce10[1], ce10[2]);
   ShellSort(a100Rand, ce100[1], ce100[2]);
@@ -172,11 +151,6 @@ begin
   ShellSort(a10Rev, ce10[9], ce10[10]);
   ShellSort(a100Rev, ce100[9], ce100[10]);
   ShellSort(a2000Rev, ce2000[9], ce2000[10]);
-
-  Writeln;
-  logArray(a10Rand);
-  logArray(a10Sorted);
-  logArray(a10Rev);
 
   // ReFill arrays
   fillArrayRandom(a10Rand);
@@ -191,11 +165,6 @@ begin
   fillArrayRev(a100Rev);
   fillArrayRev(a2000Rev);
   
-  Writeln;
-  logArray(a10Rand);
-  logArray(a10Sorted);
-  logArray(a10Rev);
-
   // BubbleSortWithFlag arrays
   BubbleSortWithFlag(a10Rand, ce10[3], ce10[4]);
   BubbleSortWithFlag(a100Rand, ce100[3], ce100[4]);
@@ -208,9 +177,4 @@ begin
   BubbleSortWithFlag(a10Rev, ce10[11], ce10[12]);
   BubbleSortWithFlag(a100Rev, ce100[11], ce100[12]);
   BubbleSortWithFlag(a2000Rev, ce2000[11], ce2000[12]);
-
-  Writeln;
-  logArray(a10Rand);
-  logArray(a10Rev);
-  logArray(a10Sorted);
 end.
