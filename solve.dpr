@@ -168,8 +168,6 @@ begin
   ShellSort(a100Rev, ce100[11], ce100[12]);
   ShellSort(a2000Rev, ce2000[11], ce2000[12]);
 
-  writeln(a10Rand[1], ', ', a10Rand[2], ', ',a10Rand[9], ', ',a10Rand[10]);
-
 writeln('|---------------------------------------------------------------------|');
 writeln('|  Array type    | Bubble Sort             | Shell Sort               |');
 writeln('|                |-------------------------|--------------------------|');
