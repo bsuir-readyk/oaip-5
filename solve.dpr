@@ -62,7 +62,7 @@ begin
 end;
 
 
-procedure SortShell (var arr: array of integer; var comparisons, insertions: integer);
+procedure SortShell (var arr: array of integer; var comparisons, insertions: uint64);
 var
     i, temp, j, gap: integer;
 begin
@@ -89,72 +89,9 @@ begin
         gap := gap div 2;
     end;
 end;
-procedure SortShell(var arr: array of integer; var comparisons, insertions: uint64);
-var
-  gap, i, j, temp: integer;
-  needNextPass: boolean;
+
+procedure printPart (var arr: array of integer; var comparisons, insertions: uint64; fillType: TFillType);
 begin
-  comparisons := 0;
-  insertions := 0;
-  
-  gap := length(arr) div 2;
-  while gap > 0 do
-  begin
-    i := gap;
-    while i < length(arr) do
-    begin
-      temp := arr[i];
-
-      j := i;
-      needNextPass := true;
-      while (j >= gap) and needNextPass do
-      begin
-        Inc(comparisons);
-
-        if arr[j-gap] > temp then
-        begin
-          arr[j] := arr[j-gap];
-          Inc(insertions);
-          j := j - gap;
-        end
-        else
-          needNextPass := false;
-      end;
-
-      if j <> i then
-      begin
-        arr[j] := temp;
-        Inc(insertions);
-      end;
-      
-      Inc(i);
-    end;
-    
-    gap := gap div 2;
-  end;
-end;
-
-
-procedure logArray(var arr: array of integer);
-var
-  i: integer;
-begin
-  i := low(arr);
-  write('[');
-  while i <= high(arr) do
-  begin
-    if i <> low(arr) then write(', ');
-
-    write(arr[i]);
-
-    Inc(i);
-  end;
-  writeln(']');
-end;
-
-procedure printPart (arr: array of integer; comparisons, insertions: uint64; fillType: TFillType);
-begin
-
   case fillType of
     ftRandom:  write(Format('| Random (%d)', [length(arr)]));
     ftSorted:  write(Format('| Sorted (%d)', [length(arr)]));
@@ -173,7 +110,6 @@ write(comparisons:11, ' | ', insertions:10);
   fill(arr, fillType);
   SortShell(arr, comparisons, insertions);
 writeln(' | ', comparisons:11, ' | ', insertions:10, ' |');
-
 end;
 
 var
@@ -202,3 +138,4 @@ printPart(arr2000, comparisons, insertions, ftSorted);
 printPart(arr2000, comparisons, insertions, ftReverse);
 writeln('|----------------------------------------------------------------------|');
 end.
+
