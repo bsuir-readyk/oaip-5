@@ -62,6 +62,33 @@ begin
 end;
 
 
+procedure SortShell (var arr: array of integer; var comparisons, insertions: integer);
+var
+    i, temp, j, gap: integer;
+begin
+    gap := length(arr) div 2;
+    while gap > 0 do
+    begin
+        i := 1;
+        while i <= length(arr) do
+        begin
+            temp := arr[i];
+            j := i;
+            Inc(comparisons);
+            while (j > gap) and (temp < arr[j - gap]) do
+            begin
+                Inc(comparisons);
+                arr[j] := arr[j - gap];
+                Inc(insertions);
+                j := j - gap;
+            end;
+            arr[j] := temp;
+            Inc(insertions);
+            Inc(i);
+        end;
+        gap := gap div 2;
+    end;
+end;
 procedure SortShell(var arr: array of integer; var comparisons, insertions: uint64);
 var
   gap, i, j, temp: integer;
@@ -77,13 +104,13 @@ begin
     while i < length(arr) do
     begin
       temp := arr[i];
-      
+
       j := i;
       needNextPass := true;
       while (j >= gap) and needNextPass do
       begin
         Inc(comparisons);
-        
+
         if arr[j-gap] > temp then
         begin
           arr[j] := arr[j-gap];
@@ -93,7 +120,7 @@ begin
         else
           needNextPass := false;
       end;
-      
+
       if j <> i then
       begin
         arr[j] := temp;
