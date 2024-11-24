@@ -57,7 +57,7 @@ begin
       Inc(j);
     end;
     
-    i := i + 1;
+    Inc(i);
   end;
 end;
 
