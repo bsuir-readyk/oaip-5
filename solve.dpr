@@ -152,6 +152,30 @@ begin
   writeln(']');
 end;
 
+procedure printPart (arr: array of integer; comparisons, insertions: uint64; fillType: TFillType);
+begin
+
+  case fillType of
+    ftRandom:  write(Format('| Random (%d)', [length(arr)]));
+    ftSorted:  write(Format('| Sorted (%d)', [length(arr)]));
+    ftReverse: write(Format('| Rev-ed (%d)', [length(arr)]));
+  end;
+
+  case length(arr) of
+    10:   write('    | ');
+    100:  write('   | ');
+    2000: write('  | ');
+  end;
+
+  fill(arr, fillType);
+  SortBubbleWFlag(arr, comparisons, insertions);
+write(comparisons:11, ' | ', insertions:10);
+  fill(arr, fillType);
+  SortShell(arr, comparisons, insertions);
+writeln(' | ', comparisons:11, ' | ', insertions:10, ' |');
+
+end;
+
 var
   arr10: array[1..10] of integer;
   arr100: array[1..100] of integer;
@@ -165,83 +189,16 @@ writeln('|                |--------------------------|--------------------------
 writeln('|                | Comparisons | Insertions | Comparisons | Insertions |');
 writeln('|----------------------------------------------------------------------|');
 
-write('| Random (10)    | ');
-  fill(arr10, ftRandom);
-  SortBubbleWFlag(arr10, comparisons, insertions);
-write(comparisons:11, ' | ', insertions:10);
-  fill(arr10, ftRandom);
-  SortShell(arr10, comparisons, insertions);
-writeln(' | ', comparisons:11, ' | ', insertions:10, ' |');
-
-write('| Sorted (10)    | ');
-  fill(arr10, ftSorted);
-  SortBubbleWFlag(arr10, comparisons, insertions);
-write(comparisons:11, ' | ', insertions:10);
-  fill(arr10, ftSorted);
-  SortShell(arr10, comparisons, insertions);
-writeln(' | ', comparisons:11, ' | ', insertions:10, ' |');
-
-write('| Reverse (10)   | ');
-  fill(arr10, ftReverse);
-  SortBubbleWFlag(arr10, comparisons, insertions);
-write(comparisons:11, ' | ', insertions:10);
-  fill(arr10, ftReverse);
-  SortShell(arr10, comparisons, insertions);
-writeln(' | ', comparisons:11, ' | ', insertions:10, ' |');
-
+printPart(arr10, comparisons, insertions, ftRandom);
+printPart(arr10, comparisons, insertions, ftSorted);
+printPart(arr10, comparisons, insertions, ftReverse);
 writeln('|----------------------------------------------------------------------|');
-
-write('| Random (100)   | ');
-  fill(arr100, ftRandom);
-  SortBubbleWFlag(arr100, comparisons, insertions);
-write(comparisons:11, ' | ', insertions:10);
-  fill(arr100, ftRandom);
-  SortShell(arr100, comparisons, insertions);
-writeln(' | ', comparisons:11, ' | ', insertions:10, ' |');
-
-write('| Sorted (100)   | ');
-  fill(arr100, ftSorted);
-  SortBubbleWFlag(arr100, comparisons, insertions);
-write(comparisons:11, ' | ', insertions:10);
-  fill(arr100, ftSorted);
-  SortShell(arr100, comparisons, insertions);
-writeln(' | ', comparisons:11, ' | ', insertions:10, ' |');
-
-write('| Reverse (100)  | ');
-  fill(arr100, ftReverse);
-  SortBubbleWFlag(arr100, comparisons, insertions);
-write(comparisons:11, ' | ', insertions:10);
-  fill(arr100, ftReverse);
-  SortShell(arr100, comparisons, insertions);
-writeln(' | ', comparisons:11, ' | ', insertions:10, ' |');
-
+printPart(arr100, comparisons, insertions, ftRandom);
+printPart(arr100, comparisons, insertions, ftSorted);
+printPart(arr100, comparisons, insertions, ftReverse);
 writeln('|----------------------------------------------------------------------|');
-
-write('| Random (2000)  | ');
-  fill(arr2000, ftRandom);
-  SortBubbleWFlag(arr2000, comparisons, insertions);
-write(comparisons:11, ' | ', insertions:10);
-  fill(arr2000, ftRandom);
-  SortShell(arr2000, comparisons, insertions);
-writeln(' | ', comparisons:11, ' | ', insertions:10, ' |');
-
-write('| Sorted (2000)  | ');
-  fill(arr2000, ftSorted);
-  SortBubbleWFlag(arr2000, comparisons, insertions);
-write(comparisons:11, ' | ', insertions:10);
-  fill(arr2000, ftSorted);
-  SortShell(arr2000, comparisons, insertions);
-writeln(' | ', comparisons:11, ' | ', insertions:10, ' |');
-
-write('| Reverse (2000) | ');
-  fill(arr2000, ftReverse);
-  SortBubbleWFlag(arr2000, comparisons, insertions);
-write(comparisons:11, ' | ', insertions:10);
-  fill(arr2000, ftReverse);
-  SortShell(arr2000, comparisons, insertions);
-writeln(' | ', comparisons:11, ' | ', insertions:10, ' |');
-
+printPart(arr2000, comparisons, insertions, ftRandom);
+printPart(arr2000, comparisons, insertions, ftSorted);
+printPart(arr2000, comparisons, insertions, ftReverse);
 writeln('|----------------------------------------------------------------------|');
-
 end.
-
